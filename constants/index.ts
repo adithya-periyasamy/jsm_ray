@@ -1,6 +1,3 @@
-// import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
-// import { z } from "zod";
-
 import { CreateAssistantDTO } from "@vapi-ai/web/dist/api";
 import z from "zod";
 
@@ -157,38 +154,77 @@ End the conversation on a polite and positive note.
   },
 };
 
+// export const feedbackSchema = z.object({
+//   totalScore: z.number(),
+//   categoryScores: z.tuple([
+//     z.object({
+//       name: z.literal("Communication Skills"),
+//       score: z.number(),
+//       comment: z.string(),
+//     }),
+//     z.object({
+//       name: z.literal("Technical Knowledge"),
+//       score: z.number(),
+//       comment: z.string(),
+//     }),
+//     z.object({
+//       name: z.literal("Problem Solving"),
+//       score: z.number(),
+//       comment: z.string(),
+//     }),
+//     z.object({
+//       name: z.literal("Cultural Fit"),
+//       score: z.number(),
+//       comment: z.string(),
+//     }),
+//     z.object({
+//       name: z.literal("Confidence and Clarity"),
+//       score: z.number(),
+//       comment: z.string(),
+//     }),
+//   ]),
+//   strengths: z.array(z.string()),
+//   areasForImprovement: z.array(z.string()),
+//   finalAssessment: z.string(),
+// });
+
 export const feedbackSchema = z.object({
-  totalScore: z.number(),
-  categoryScores: z.tuple([
-    z.object({
-      name: z.literal("Communication Skills"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Technical Knowledge"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Problem Solving"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Cultural Fit"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-    z.object({
-      name: z.literal("Confidence and Clarity"),
-      score: z.number(),
-      comment: z.string(),
-    }),
-  ]),
-  strengths: z.array(z.string()),
-  areasForImprovement: z.array(z.string()),
-  finalAssessment: z.string(),
+  totalScore: z
+    .number()
+    .min(0)
+    .max(100)
+    .describe("Overall interview score from 0 to 100"),
+  categoryScores: z
+    .array(
+      z.object({
+        name: z
+          .enum([
+            "Communication Skills",
+            "Technical Knowledge",
+            "Problem Solving",
+            "Cultural Fit",
+            "Confidence and Clarity",
+          ])
+          .describe("Category name"),
+        score: z
+          .number()
+          .min(0)
+          .max(100)
+          .describe("Score for this category from 0 to 100"),
+        comment: z
+          .string()
+          .describe("Detailed comment about performance in this category"),
+      })
+    )
+    .length(5)
+    .describe("Exactly 5 category scores"),
+  strengths: z.array(z.string()).describe("List of candidate's strengths"),
+  areasForImprovement: z
+    .array(z.string())
+    .describe("List of areas where candidate can improve"),
+  finalAssessment: z
+    .string()
+    .describe("Overall assessment and summary of the interview"),
 });
 
 export const interviewCovers = [
