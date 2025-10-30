@@ -34,3 +34,17 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+references:
+
+1. https://jsmastery.com/module/full-stack-interview-platform-w-real-time-ai-voice-agent-in-next-js/vapi-workflow-assistant-creation-
+
+2. https://jsmastery.com/video-kit/a26f2c95-f3b7-42c6-b62f-fcf8a5f0261f
+
+3. firebase
+
+4. https://aistudio.google.com/
+
+5. vercel
+
+6. https://dashboard.vapi.ai/#

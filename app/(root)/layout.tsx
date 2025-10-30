@@ -10,10 +10,17 @@ const Rootlayout = async ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="root-layout">
       <nav>
-        <Link href="/" className="flex items-center gap-2">
-          <Image src="/logo.svg" alt="MockMate Logo" width={38} height={32} />
-          <h2 className="text-primary-100">Ray</h2>
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/favicon-dark.png"
+              alt="MockMate Logo"
+              width={38}
+              height={32}
+            />
+            <h2 className="text-primary-200">Ray</h2>
+          </Link>
+        </div>
       </nav>
 
       {children}
