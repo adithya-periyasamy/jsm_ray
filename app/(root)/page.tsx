@@ -1,4 +1,5 @@
 import InterviewCard from "@/components/InterviewCard";
+import SignOutButton from "@/components/SignOutButton";
 import { Button } from "@/components/ui/button";
 import { getCurrentUser } from "@/lib/actions/auth.action";
 import {
@@ -21,6 +22,13 @@ const page = async () => {
 
   return (
     <>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-2xl font-semibold text-primary-100">
+          Welcome back, {user?.name || "User"}👋
+        </h1>
+        <SignOutButton /> {/* 👈 button added here */}
+      </div>
+
       <section className="card-cta">
         <div className="flex flex-col gap-6 max-w-lg">
           <h2>Get Interview-Ready with AI-Powered Practice & Feedback</h2>

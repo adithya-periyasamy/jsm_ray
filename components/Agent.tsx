@@ -128,6 +128,7 @@ const Agent = ({
   const [messages, setMessages] = useState<SavedMessage[]>([]);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [lastMessage, setLastMessage] = useState<string>("");
+  const [isGeneratingFeedback, setIsGeneratingFeedback] = useState(false);
 
   // runs on component mount
   useEffect(() => {
@@ -186,6 +187,7 @@ const Agent = ({
 
     const handleGenerateFeedback = async (messages: SavedMessage[]) => {
       console.log("handleGenerateFeedback");
+      setIsGeneratingFeedback(true);
 
       const { success, feedbackId: id } = await createFeedback({
         interviewId: interviewId!,
@@ -198,6 +200,7 @@ const Agent = ({
         router.push(`/interview/${interviewId}/feedback`);
       } else {
         console.log("Error saving feedback");
+        setIsGeneratingFeedback(false);
         router.push("/");
       }
     };
@@ -272,6 +275,23 @@ const Agent = ({
     setCallStatus(CallStatus.FINISHED);
     vapi.stop();
   };
+
+  // Show loading state while generating feedback
+  if (isGeneratingFeedback) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6">
+        <div className="relative">
+          <div className="w-16 h-16 border-4 border-primary-200/30 border-t-primary-200 rounded-full animate-spin" />
+        </div>
+        <div className="text-center space-y-2">
+          <h2 className="text-2xl font-semibold">Generating Your Feedback</h2>
+          <p className="text-gray-400">
+            Please wait while we analyze your interview performance...
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>
